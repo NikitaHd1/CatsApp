@@ -51,8 +51,10 @@ abstract class BaseFragment(@LayoutRes val layoutRes: Int = 0) : DaggerFragment(
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if (requestCode == WRITE_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            onWritePermissionGrantedListener?.invoke()
+        if (requestCode == WRITE_REQUEST_CODE && permissions.contains(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                onWritePermissionGrantedListener?.invoke()
+            }
             onWritePermissionGrantedListener = null
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
