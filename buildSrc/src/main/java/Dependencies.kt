@@ -1,6 +1,6 @@
 object AndroidSdk {
     const val minSdkVersion = 21
-    const val targetSdkVersion = 29
+    const val targetSdkVersion = 28
 }
 
 object Dependencies {
