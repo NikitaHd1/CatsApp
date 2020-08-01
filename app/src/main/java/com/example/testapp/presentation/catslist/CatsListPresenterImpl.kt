@@ -12,20 +12,36 @@ class CatsListPresenterImpl @Inject constructor(
 ) : BasePresenter<CatsListMvp.CatListView>(),
     CatsListMvp.CatListBasePresenter {
 
-    private val limit = 20
-    private var page = 0
-    private val order = "DESC"
+    companion object {
+        const val LIMIT = 20
+        private const val ORDER = "DESC"
+        private const val FIRST_PAGE = "0"
+    }
 
     override fun attachView(view: CatsListMvp.CatListView) {
         super.attachView(view)
+        loadCats(FIRST_PAGE)
+    }
+
+    override fun loadMore(page: Int) {
+        loadCats(page.toString())
+    }
+
+    override fun saveToFavoriteList(imageId: String, imageUrl: String) {
+
+    }
+
+    override fun removeItemFromFavoriteList(imageId: String) {
+
+    }
+
+    private fun loadCats(page: String) {
         addDisposable(
-            getCatsInteractor.execute(PaginationParams(limit.toString(), page.toString(), order))
+            getCatsInteractor.execute(PaginationParams(LIMIT.toString(), page, ORDER))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    if (it != null) {
-
-                    }
+                    it?.let { view?.updateData(it) }
                 }, {
 
                 })
