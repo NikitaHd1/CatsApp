@@ -6,10 +6,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testapp.R
-import com.example.testapp.domain.models.CatItem
 import com.example.testapp.presentation.adapters.CatsAdapter
 import com.example.testapp.presentation.base.BaseFragment
 import com.example.testapp.presentation.listeners.EndlessRecyclerViewScrollListener
+import com.example.testapp.presentation.model.CatItem
 import com.example.testapp.presentation.utils.FileUtil.saveImage
 import kotlinx.android.synthetic.main.fragment_cats_list.*
 import java.io.File
