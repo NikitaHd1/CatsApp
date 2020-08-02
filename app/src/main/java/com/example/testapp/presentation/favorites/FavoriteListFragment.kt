@@ -8,7 +8,8 @@ import com.example.testapp.R
 import com.example.testapp.domain.models.CatModel
 import com.example.testapp.presentation.adapters.FavoriteCatsAdapter
 import com.example.testapp.presentation.dialogs.FullscreenDialogFragment
-import kotlinx.android.synthetic.main.fragment_favorities_list.recyclerView
+import com.example.testapp.presentation.utils.ViewUtil.isVisible
+import kotlinx.android.synthetic.main.fragment_favorities_list.*
 import javax.inject.Inject
 
 class FavoriteListFragment : FullscreenDialogFragment(R.layout.fragment_favorities_list),
@@ -24,6 +25,7 @@ class FavoriteListFragment : FullscreenDialogFragment(R.layout.fragment_favoriti
     }
 
     override fun showFavoriteCatsList(cats: List<CatModel>) {
+        emptyView.isVisible = false
         (recyclerView.adapter as FavoriteCatsAdapter).update(cats)
     }
 
