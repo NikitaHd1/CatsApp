@@ -1,6 +1,6 @@
 package com.example.testapp.data.network
 
-import com.example.testapp.data.models.CatImageResponse
+import com.example.testapp.data.models.CatItemResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,5 +11,5 @@ interface ApiService {
         @Query("limit") limit: String,
         @Query("page") page: String,
         @Query("order") order: String
-    ): Single<List<CatImageResponse>>
+    ): Single<List<CatItemResponse>>
 }

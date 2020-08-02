@@ -22,6 +22,7 @@ class FavoriteListFragment : FullscreenDialogFragment(R.layout.fragment_favoriti
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         presenter.attachView(this)
+        initToolBar()
     }
 
     override fun showFavoriteCatsList(cats: List<CatModel>) {
@@ -34,6 +35,12 @@ class FavoriteListFragment : FullscreenDialogFragment(R.layout.fragment_favoriti
             hasFixedSize()
             adapter = FavoriteCatsAdapter(mutableListOf())
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        }
+    }
+
+    private fun initToolBar() {
+        toolbar.setNavigationOnClickListener {
+            activity?.onBackPressed()
         }
     }
 

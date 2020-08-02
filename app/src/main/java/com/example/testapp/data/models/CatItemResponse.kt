@@ -2,7 +2,7 @@ package com.example.testapp.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class CatImageResponse(
+data class CatItemResponse(
     @SerializedName("breeds")
     val breeds: List<Breed>,
     @SerializedName("categories")

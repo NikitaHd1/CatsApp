@@ -10,9 +10,10 @@ import javax.inject.Inject
 
 class GetCatsInteractorImpl @Inject constructor(
     private val repository: CatsRepository,
-    private val catsRequestMapper: Mappers.CatsRequestMapper
+    private val catsRequestMapper: Mappers.CatsRequestMapper,
+    private val catsResponseMapper: Mappers.CatsResponseMapper
 ) : Interactors.GetCatsInteractor {
 
     override fun execute(parameters: PaginationParams): Single<List<CatModel>> =
-        repository.getCats(catsRequestMapper.map(parameters))
+        repository.getCats(catsRequestMapper.map(parameters)).map(catsResponseMapper::map)
 }
