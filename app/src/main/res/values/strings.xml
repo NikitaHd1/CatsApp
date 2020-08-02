@@ -6,4 +6,5 @@
     <string name="image_saved">Image saved</string>
     <string name="image_save_failure">Sorry, we cannot save this image. Please try again later.</string>
     <string name="empty_cats_list_description">The list is empty, you haven\'t added cats here yet</string>
+    <string name="image_id">Image ID: %s</string>
 </resources>
