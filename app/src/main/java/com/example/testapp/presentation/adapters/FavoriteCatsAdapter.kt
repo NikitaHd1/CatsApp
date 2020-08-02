@@ -8,7 +8,7 @@ import com.example.testapp.R
 import com.example.testapp.domain.models.CatModel
 import com.example.testapp.presentation.utils.ViewUtil
 import com.example.testapp.presentation.utils.ViewUtil.loadImage
-import kotlinx.android.synthetic.main.cat_item.view.*
+import kotlinx.android.synthetic.main.favorite_cat_item.view.*
 
 class FavoriteCatsAdapter(var favoriteCatsList: MutableList<CatModel>) :
     RecyclerView.Adapter<FavoriteCatsAdapter.FavoriteCatsViewHolder>() {
@@ -37,6 +37,7 @@ class FavoriteCatsAdapter(var favoriteCatsList: MutableList<CatModel>) :
         private val progressDrawable = ViewUtil.getProgressDrawable(view.context)
 
         fun bind(catModel: CatModel) {
+            view.description.text = view.context.getString(R.string.image_id, catModel.id)
             view.imageView.loadImage(catModel.imageUrl, progressDrawable) {}
         }
     }

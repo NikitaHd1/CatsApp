@@ -16,7 +16,7 @@ abstract class BaseDialogFragment(@LayoutRes val layoutRes: Int = 0) : DaggerDia
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (isFullscreen) {
-            setStyle(DialogFragment.STYLE_NORMAL, R.style.Widget_AppCompat_Toolbar)
+            setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme)
         }
     }
 
