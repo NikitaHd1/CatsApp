@@ -1,8 +1,8 @@
 package com.example.testapp.presentation.catslist
 
-import com.example.testapp.domain.models.CatItem
 import com.example.testapp.presentation.base.IBaseView
 import com.example.testapp.presentation.base.IBasePresenter
+import com.example.testapp.presentation.model.CatItem
 
 interface CatsListMvp {
 

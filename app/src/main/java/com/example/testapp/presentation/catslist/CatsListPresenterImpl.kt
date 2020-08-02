@@ -1,14 +1,21 @@
 package com.example.testapp.presentation.catslist
 
 import com.example.testapp.domain.Interactors
+import com.example.testapp.domain.models.CatModel
 import com.example.testapp.domain.models.PaginationParams
 import com.example.testapp.presentation.base.BasePresenter
+import com.example.testapp.presentation.model.CatItem
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class CatsListPresenterImpl @Inject constructor(
-    private val getCatsInteractor: Interactors.GetCatsInteractor
+    private val getCatsInteractor: Interactors.GetCatsInteractor,
+    private val deleteFavoriteCatInteractor: Interactors.DeleteFavoriteCatInteractor,
+    private val saveToFavoriteCatsInteractor: Interactors.SaveToFavoriteCatsInteractor,
+    private val getFavoriteCatsInteractor: Interactors.GetFavoriteCatsInteractor
 ) : BasePresenter<CatsListMvp.CatListView>(),
     CatsListMvp.CatListBasePresenter {
 
@@ -28,16 +35,45 @@ class CatsListPresenterImpl @Inject constructor(
     }
 
     override fun saveToFavoriteList(imageId: String, imageUrl: String) {
+        addDisposable(
+            saveToFavoriteCatsInteractor.execute(CatModel(imageId, imageUrl))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
 
+                }, {
+
+                })
+        )
     }
 
     override fun removeItemFromFavoriteList(imageId: String) {
+        addDisposable(
+            deleteFavoriteCatInteractor.execute(imageId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
 
+                }, {
+
+                })
+        )
     }
 
     private fun loadCats(page: String) {
         addDisposable(
-            getCatsInteractor.execute(PaginationParams(LIMIT.toString(), page, ORDER))
+            Single.zip(
+                getCatsInteractor.execute(PaginationParams(LIMIT.toString(), page, ORDER)),
+                getFavoriteCatsInteractor.execute(Unit),
+                BiFunction<List<CatModel>, List<CatModel>, List<CatItem>> { catsResponse, favoriteCats ->
+                    val catItems = mutableListOf<CatItem>()
+                    catsResponse.forEach { cat ->
+                        val isFavoriteCat = favoriteCats.any { it.imageUrl == cat.imageUrl }
+                        catItems.add(CatItem(cat.id, cat.imageUrl, isFavoriteCat))
+                    }
+                    return@BiFunction catItems
+                }
+            )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

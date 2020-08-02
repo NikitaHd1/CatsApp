@@ -4,7 +4,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/catListFragment">
 
-    <fragment
+    <dialog
         android:id="@+id/favoriteListFragment"
         android:name="com.example.testapp.presentation.favorites.FavoriteListFragment"
         android:label="FavoriteListFragment" />

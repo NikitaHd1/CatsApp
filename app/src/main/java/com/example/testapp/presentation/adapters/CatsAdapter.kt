@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testapp.R
-import com.example.testapp.domain.models.CatItem
+import com.example.testapp.presentation.model.CatItem
 import com.example.testapp.presentation.utils.ViewUtil.getCachedImageFile
 import com.example.testapp.presentation.utils.ViewUtil.getProgressDrawable
 import com.example.testapp.presentation.utils.ViewUtil.isVisible
@@ -33,10 +33,10 @@ class CatsAdapter(
         holder.bind(catsList[position])
     }
 
-    fun update(catsList: List<CatItem>) {
-        val oldSize = this.catsList.size
-        this.catsList.addAll(catsList)
-        notifyItemRangeInserted(oldSize, this.catsList.size)
+    fun update(catItems: List<CatItem>) {
+        val oldSize = catsList.size
+        catsList.addAll(catItems)
+        notifyItemRangeInserted(oldSize, catsList.size)
     }
 
     inner class CatsViewHolder(private val view: View) :
@@ -45,24 +45,34 @@ class CatsAdapter(
         private val progressDrawable = getProgressDrawable(view.context)
 
         fun bind(catItem: CatItem) {
+            view.saveImageButton.isVisible = false
+            loadImage(catItem)
+            view.favoriteButton.setOnCheckedChangeListener(null)
+            view.favoriteButton.isChecked = catItem.isFavorite
+            setupListenerToFavoriteButton(catItem)
+        }
 
+        private fun setupListenerToFavoriteButton(catItem: CatItem) {
+            view.favoriteButton.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    onAddToFavoriteListener(catItem.id, catItem.imageUrl)
+                } else {
+                    onRemoveFromFavoriteListener(catItem.id)
+                }
+                catItem.isFavorite = isChecked
+            }
+        }
+
+        private fun loadImage(catItem: CatItem) {
             view.imageView.loadImage(catItem.imageUrl, progressDrawable) {
-                view.saveImage.isVisible = true
-                view.saveImage.setOnClickListener {
+                view.saveImageButton.isVisible = true
+                view.saveImageButton.setOnClickListener {
                     getCachedImageFile(
                         view.imageView.context,
                         catItem.imageUrl
                     ) { file, fileExtension ->
                         saveImageListener(file, catItem.id, fileExtension)
                     }
-                }
-            }
-
-            view.addToFavoriteButton.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    onAddToFavoriteListener(catItem.id, catItem.imageUrl)
-                } else {
-                    onRemoveFromFavoriteListener(catItem.id)
                 }
             }
         }

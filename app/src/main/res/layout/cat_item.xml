@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ToggleButton
-        android:id="@+id/addToFavoriteButton"
+        android:id="@+id/favoriteButton"
         android:layout_width="@dimen/default_toggle_button_height"
         android:layout_height="@dimen/default_toggle_button_width"
         android:layout_centerVertical="true"
@@ -29,14 +29,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/saveImage"
+        android:id="@+id/saveImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_1x"
         android:text="Save image"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/addToFavoriteButton"
+        app:layout_constraintRight_toLeftOf="@+id/favoriteButton"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

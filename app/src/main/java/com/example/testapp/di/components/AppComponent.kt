@@ -18,7 +18,9 @@ import javax.inject.Singleton
         InteractorsModule::class,
         ApiModule::class,
         RepositoryModule::class,
-        MappersModule::class
+        MappersModule::class,
+        DatabaseModule::class,
+        LocalStoreModule::class
     ]
 )
 interface AppComponent : AndroidInjector<Application> {

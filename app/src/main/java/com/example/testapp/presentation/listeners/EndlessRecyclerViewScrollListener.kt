@@ -36,7 +36,7 @@ abstract class EndlessRecyclerViewScrollListener(private val layoutManager: Recy
                 lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions)
             }
             is GridLayoutManager -> {
-                val gridLayoutManager = (layoutManager as GridLayoutManager)
+                val gridLayoutManager = layoutManager
                 lastVisibleItemPosition = gridLayoutManager.findLastVisibleItemPosition()
                 visibleThreshold *= gridLayoutManager.spanCount
             }
