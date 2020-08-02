@@ -6,6 +6,7 @@
     <dimen name="spacing_1.5x">12dp</dimen>
     <dimen name="spacing_2x">16dp</dimen>
     <dimen name="spacing_2.5x">20dp</dimen>
+    <dimen name="spacing_3x">24dp</dimen>
 
     <dimen name="default_image_view_height">98dp</dimen>
     <dimen name="default_image_view_width">98dp</dimen>

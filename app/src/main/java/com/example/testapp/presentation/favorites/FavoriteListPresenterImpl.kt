@@ -22,7 +22,9 @@ class FavoriteListPresenterImpl @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    view?.showFavoriteCatsList(it)
+                    if (it.isNotEmpty()) {
+                        view?.showFavoriteCatsList(it)
+                    }
                 }, {
                     view?.showError(R.string.default_error_message)
                 })
