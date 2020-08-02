@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">WoopApp</string>
+    <string name="default_error_message">Sorry, but you cannot complete this action. Please try again later.</string>
+    <string name="cat_saved_message">Congratulations, you have added the cat to your favorites</string>
+    <string name="cat_deleted_message">Congratulations, you have removed the cat from your favorites</string>
+    <string name="image_saved">Image saved</string>
+    <string name="image_save_failure">Sorry, we cannot save this image. Please try again later.</string>
 </resources>

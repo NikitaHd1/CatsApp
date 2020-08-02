@@ -5,4 +5,6 @@ import androidx.annotation.StringRes
 interface IBaseView {
 
     fun showError(@StringRes messageId: Int)
+
+    fun showSuccessMessage(@StringRes messageId: Int)
 }
