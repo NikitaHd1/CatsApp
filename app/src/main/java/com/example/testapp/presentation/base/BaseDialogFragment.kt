@@ -33,4 +33,8 @@ abstract class BaseDialogFragment(@LayoutRes val layoutRes: Int = 0) : DaggerDia
     override fun showError(messageId: Int) {
         (requireActivity() as? BaseActivity)?.showError(messageId)
     }
+
+    override fun showSuccessMessage(messageId: Int) {
+        (requireActivity() as? BaseActivity)?.showSuccessMessage(messageId)
+    }
 }

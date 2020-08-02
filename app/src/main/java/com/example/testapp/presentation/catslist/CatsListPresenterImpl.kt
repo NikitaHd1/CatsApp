@@ -1,5 +1,6 @@
 package com.example.testapp.presentation.catslist
 
+import com.example.testapp.R
 import com.example.testapp.domain.Interactors
 import com.example.testapp.domain.models.CatModel
 import com.example.testapp.domain.models.PaginationParams
@@ -40,9 +41,9 @@ class CatsListPresenterImpl @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-
+                    view?.showSuccessMessage(R.string.cat_saved_message)
                 }, {
-
+                    view?.showError(R.string.default_error_message)
                 })
         )
     }
@@ -53,9 +54,9 @@ class CatsListPresenterImpl @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-
+                    view?.showSuccessMessage(R.string.cat_deleted_message)
                 }, {
-
+                    view?.showError(R.string.default_error_message)
                 })
         )
     }
@@ -68,7 +69,7 @@ class CatsListPresenterImpl @Inject constructor(
                 BiFunction<List<CatModel>, List<CatModel>, List<CatItem>> { catsResponse, favoriteCats ->
                     val catItems = mutableListOf<CatItem>()
                     catsResponse.forEach { cat ->
-                        val isFavoriteCat = favoriteCats.any { it.imageUrl == cat.imageUrl }
+                        val isFavoriteCat = favoriteCats.any { it.id == cat.id }
                         catItems.add(CatItem(cat.id, cat.imageUrl, isFavoriteCat))
                     }
                     return@BiFunction catItems
@@ -79,7 +80,7 @@ class CatsListPresenterImpl @Inject constructor(
                 .subscribe({
                     it?.let { view?.updateData(it) }
                 }, {
-
+                    view?.showError(R.string.default_error_message)
                 })
         )
     }

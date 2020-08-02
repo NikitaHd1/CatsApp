@@ -1,5 +1,6 @@
 package com.example.testapp.presentation.favorites
 
+import com.example.testapp.R
 import com.example.testapp.domain.Interactors
 import com.example.testapp.presentation.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,7 +24,7 @@ class FavoriteListPresenterImpl @Inject constructor(
                 .subscribe({
                     view?.showFavoriteCatsList(it)
                 }, {
-
+                    view?.showError(R.string.default_error_message)
                 })
         )
     }

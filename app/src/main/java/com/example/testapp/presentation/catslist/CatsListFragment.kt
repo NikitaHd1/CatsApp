@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testapp.R
 import com.example.testapp.presentation.adapters.CatsAdapter
+import com.example.testapp.presentation.base.BaseActivity
 import com.example.testapp.presentation.base.BaseFragment
 import com.example.testapp.presentation.listeners.EndlessRecyclerViewScrollListener
 import com.example.testapp.presentation.model.CatItem
@@ -54,7 +55,16 @@ class CatsListFragment : BaseFragment(R.layout.fragment_cats_list), CatsListMvp.
 
     private fun saveImageToFile(imageFile: File, imageName: String, fileExtension: String) {
         checkWritePermission {
-            saveImage(imageFile, imageName, fileExtension)
+            saveImage(
+                imageFile,
+                imageName,
+                fileExtension,
+                onSuccessListener = {
+                    showSuccessMessage(R.string.image_saved)
+                },
+                onFailureListener = {
+                    showError(R.string.image_save_failure)
+                })
         }
     }
 

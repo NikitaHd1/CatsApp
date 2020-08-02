@@ -31,6 +31,10 @@ abstract class BaseFragment(@LayoutRes val layoutRes: Int = 0) : DaggerFragment(
         (requireActivity() as? BaseActivity)?.showError(messageId)
     }
 
+    override fun showSuccessMessage(messageId: Int) {
+        (requireActivity() as? BaseActivity)?.showSuccessMessage(messageId)
+    }
+
     fun checkWritePermission(onWritePermissionGrantedListener: () -> Unit) {
         val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         val hasPermission = ContextCompat.checkSelfPermission(
