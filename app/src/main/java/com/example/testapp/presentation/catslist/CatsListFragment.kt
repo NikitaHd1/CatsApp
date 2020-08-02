@@ -2,12 +2,12 @@ package com.example.testapp.presentation.catslist
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testapp.R
 import com.example.testapp.presentation.adapters.CatsAdapter
-import com.example.testapp.presentation.base.BaseActivity
 import com.example.testapp.presentation.base.BaseFragment
 import com.example.testapp.presentation.listeners.EndlessRecyclerViewScrollListener
 import com.example.testapp.presentation.model.CatItem
@@ -63,13 +63,23 @@ class CatsListFragment : BaseFragment(R.layout.fragment_cats_list), CatsListMvp.
                     showSuccessMessage(R.string.image_saved)
                 },
                 onFailureListener = {
-                    showError(R.string.image_save_failure)
+                    showSavingImageError(it)
                 })
         }
     }
 
     override fun updateData(catsList: List<CatItem>) {
         (recyclerView.adapter as CatsAdapter).update(catsList)
+    }
+
+    private fun showSavingImageError(message: String?) {
+        requireActivity().runOnUiThread {
+            Toast.makeText(
+                requireContext(),
+                message ?: getString(R.string.default_error_message),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun onDestroyView() {
