@@ -10,7 +10,7 @@ object FileUtil {
         imageName: String,
         fileExtension: String,
         onSuccessListener: () -> Unit,
-        onFailureListener: () -> Unit
+        onFailureListener: (String?) -> Unit
     ) {
         try {
             val downloadFolderPath =
@@ -19,8 +19,8 @@ object FileUtil {
             imageFile.copyTo(newFile)
             onSuccessListener()
         } catch (e: Exception) {
+            onFailureListener(e.message)
             e.printStackTrace()
-            onFailureListener()
         }
     }
 }

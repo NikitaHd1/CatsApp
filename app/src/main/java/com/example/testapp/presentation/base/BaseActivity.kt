@@ -15,10 +15,14 @@ abstract class BaseActivity(@LayoutRes val layoutRes: Int = 0) : DaggerAppCompat
     }
 
     fun showError(messageId: Int) {
-        Toast.makeText(this, getString(messageId), Toast.LENGTH_SHORT).show()
+        runOnUiThread {
+            Toast.makeText(this, getString(messageId), Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun showSuccessMessage(messageId: Int) {
-        Toast.makeText(this, getString(messageId), Toast.LENGTH_SHORT).show()
+        runOnUiThread {
+            Toast.makeText(this, getString(messageId), Toast.LENGTH_SHORT).show()
+        }
     }
 }
