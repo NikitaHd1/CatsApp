@@ -11,9 +11,6 @@ abstract class BasePresenter<T : IBaseView> : IBasePresenter<T> {
 
     var view: T? = null
 
-    val isViewAttached: Boolean
-        get() = view != null
-
     override fun attachView(view: T) {
         this.view = view
     }
