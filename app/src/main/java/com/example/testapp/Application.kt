@@ -7,8 +7,7 @@ import dagger.android.support.DaggerApplication
 
 class Application : DaggerApplication() {
 
-    lateinit var appComponent: AppComponent
-        private set
+    private lateinit var appComponent: AppComponent
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         appComponent = DaggerAppComponent.builder()
