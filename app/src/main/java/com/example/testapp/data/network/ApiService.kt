@@ -11,6 +11,7 @@ interface ApiService {
     fun getCats(
         @Query("limit") limit: String,
         @Query("page") page: String,
+
         @Query("order") order: String
     ): Single<List<CatItemResponse>>
 }
